@@ -22,60 +22,10 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
 
-    {{-- Tailwind CSS via CDN --}}
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: {
-                            50: '#f0f4f8',
-                            100: '#d9e2ec',
-                            200: '#bcccdc',
-                            300: '#9fb3c8',
-                            400: '#829ab1',
-                            500: '#627d98',
-                            600: '#486581',
-                            700: '#334e68',
-                            800: '#243b53',
-                            900: '#102a43',
-                            950: '#0a1929',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 
-    {{-- Lucide Icons --}}
-    <script src="https://unpkg.com/lucide@latest"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-        [x-cloak] {
-            display: none !important;
-        }
-
-        body {
-            font-family: "Inter", sans-serif;
-        }
-
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
-
-    {{-- Alpine.js --}}
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
 </head>
 
 <body class="text-gray-800 bg-gray-50">
@@ -243,9 +193,6 @@
         <i data-lucide="message-circle" class="w-7 h-7"></i>
     </a>
 
-    <script>
-        lucide.createIcons();
-    </script>
     @stack('scripts')
 </body>
 
