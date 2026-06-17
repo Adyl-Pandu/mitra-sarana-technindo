@@ -9,49 +9,70 @@
     <script>tailwind.config={theme:{extend:{colors:{navy:{900:'#102a43',950:'#0a1929'}}}}}</script>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-navy-950 min-h-screen flex items-center justify-center p-4">
-    <div class="w-full max-w-md">
-        <div class="text-center mb-8">
-            <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <i data-lucide="anchor" class="w-9 h-9 text-white"></i>
+<body class="flex items-center justify-center min-h-screen p-4 bg-navy-950">
+    <div class="w-full max-w-md mx-auto">
+        <!-- Header Section (Brand & Identity) -->
+        <div class="flex flex-col items-center mb-8 text-center">
+            <div
+                class="flex items-center justify-center w-16 h-16 mb-4 transition-transform rounded-2xl bg-white/10 backdrop-blur-sm hover:scale-105">
+                <i data-lucide="anchor" class="w-8 h-8 text-white"></i>
             </div>
-            <h1 class="text-2xl font-bold text-white">Admin Panel</h1>
-            <p class="text-sm text-gray-400 mt-1">PT Mitra Sarana Technindo</p>
+            <h1 class="text-2xl font-bold tracking-tight text-white">Admin Panel</h1>
+            <p class="mt-1.5 text-sm tracking-wide text-slate-400">PT Mitra Sarana Technindo</p>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-2xl p-8">
-            <h2 class="text-lg font-semibold text-gray-900 mb-6">Masuk ke Dashboard</h2>
+        <!-- Card Form Section -->
+        <div class="p-8 bg-white border shadow-2xl border-slate-100 rounded-2xl">
+            <h2 class="mb-6 text-xl font-bold tracking-tight text-slate-900">Masuk ke Dashboard</h2>
 
+            <!-- Laravel Error Alert -->
             @if($errors->any())
-                <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm mb-5">
-                    {{ $errors->first() }}
+                <div
+                    class="flex items-center px-4 py-3 mb-6 text-sm text-red-700 border border-red-100 rounded-xl bg-red-50 animate-fade-in">
+                    <span class="font-medium">{{ $errors->first() }}</span>
                 </div>
             @endif
 
-            <form action="{{ route('admin.login.post') }}" method="POST">
+            <!-- Form Layout -->
+            <form action="{{ route('admin.login.post') }}" method="POST" class="space-y-5">
                 @csrf
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+
+                <!-- Email Input Group -->
+                <div>
+                    <label for="email" class="block mb-1.5 text-sm font-semibold text-slate-700">Email</label>
                     <input type="email" name="email" id="email" required autofocus value="{{ old('email') }}"
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-navy-900 focus:border-navy-900"
-                           placeholder="admin@mitrast.com">
+                        class="w-full px-4 py-3 text-sm transition-all duration-200 border outline-none border-slate-200 rounded-xl bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-slate-900 focus:border-slate-900 placeholder-slate-400"
+                        placeholder="admin@mitrast.com">
                 </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+
+                <!-- Password Input Group -->
+                <div>
+                    <label for="password" class="block mb-1.5 text-sm font-semibold text-slate-700">Password</label>
                     <input type="password" name="password" id="password" required
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-navy-900 focus:border-navy-900"
-                           placeholder="Masukkan password">
+                        class="w-full px-4 py-3 text-sm transition-all duration-200 border outline-none border-slate-200 rounded-xl bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-slate-900 focus:border-slate-900 placeholder-slate-400"
+                        placeholder="Masukkan password">
                 </div>
-                <div class="flex items-center mb-6">
-                    <input type="checkbox" name="remember" id="remember" class="rounded border-gray-300">
-                    <label for="remember" class="ml-2 text-sm text-gray-600">Ingat saya</label>
+
+                <!-- Remember Me & Utility -->
+                <div class="flex items-center justify-between pt-1">
+                    <div class="flex items-center">
+                        <input type="checkbox" name="remember" id="remember"
+                            class="w-4 h-4 rounded text-slate-900 border-slate-300 focus:ring-slate-900 focus:ring-offset-1">
+                        <label for="remember"
+                            class="ml-2 text-sm font-medium cursor-pointer select-none text-slate-600">Ingat saya</label>
+                    </div>
                 </div>
-                <button type="submit" class="w-full bg-navy-900 hover:bg-navy-950 text-white font-semibold py-3 rounded-lg transition">
-                    Masuk
-                </button>
+
+                <!-- Submit Button -->
+                <div class="pt-2">
+                    <button type="submit"
+                        class="w-full py-3 text-sm font-semibold text-white transition-all duration-200 rounded-xl bg-slate-900 hover:bg-slate-800 focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 active:scale-[0.99]">
+                        Masuk
+                    </button>
+                </div>
             </form>
         </div>
-    </div>
+    </div>z
     <script>lucide.createIcons();</script>
 </body>
 </html>

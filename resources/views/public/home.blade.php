@@ -236,7 +236,7 @@
 </section>
 
 {{-- About Section --}}
-<section class="py-16 bg-navy-900" id="tentang">
+{{-- <section class="py-16 bg-navy-900" id="tentang">
     <div class="px-4 mx-auto max-w-7xl">
         <div class="grid items-center gap-12 lg:grid-cols-2">
             <div>
@@ -311,6 +311,6 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 @endsection
