@@ -6,6 +6,8 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
 {
@@ -33,22 +35,38 @@ class CheckoutController extends Controller
             }
         }
 
+        // Generate idempotency token
+        session()->put('checkout_token', Str::random(32));
+
         return view('public.checkout', compact('cartItems', 'total'));
     }
 
     public function process(Request $request)
     {
         $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'customer_phone' => 'required|string|max:20',
+            'customer_name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s\.\',\-]+$/'],
+            'customer_phone' => 'required|digits_between:11,12',
             'customer_address' => 'required|string',
-            'customer_email' => 'nullable|email|max:255',
+            'customer_email' => 'required|email|max:255',
             'notes' => 'nullable|string|max:500',
+            'checkout_token' => 'required|string',
         ], [
             'customer_name.required' => 'Nama lengkap wajib diisi.',
+            'customer_name.regex' => 'Nama lengkap hanya boleh berisi huruf.',
             'customer_phone.required' => 'Nomor telepon wajib diisi.',
+            'customer_phone.digits_between' => 'Nomor telepon harus 11-12 digit angka.',
             'customer_address.required' => 'Alamat pengiriman wajib diisi.',
+            'customer_email.required' => 'Email wajib diisi.',
+            'customer_email.email' => 'Format email tidak valid.',
+            'checkout_token.required' => 'Token checkout tidak valid.',
         ]);
+
+        // Idempotency check — prevent duplicate submission
+        $token = $request->checkout_token;
+        $sessionToken = session()->pull('checkout_token');
+        if (!$sessionToken || $sessionToken !== $token) {
+            return redirect()->route('cart.index')->with('error', 'Pesanan sudah diproses sebelumnya.');
+        }
 
         $cart = session()->get('cart', []);
 
@@ -56,24 +74,39 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'Keranjang belanja Anda kosong.');
         }
 
-        // Create Order
-        $order = Order::create([
-            'order_number' => Order::generateOrderNumber(),
-            'customer_name' => $request->customer_name,
-            'customer_phone' => $request->customer_phone,
-            'customer_address' => $request->customer_address,
-            'customer_email' => $request->customer_email,
-            'notes' => $request->notes,
-            'total_amount' => 0,
-            'status' => 'menunggu_konfirmasi',
-        ]);
-
-        $total = 0;
-        $whatsappItems = [];
-
+        // Validate stock availability before processing
+        $products = Product::whereIn('id', array_keys($cart))->get()->keyBy('id');
         foreach ($cart as $productId => $item) {
-            $product = Product::find($productId);
-            if ($product && $product->is_active) {
+            $product = $products->get($productId);
+            if (!$product || !$product->is_active) {
+                return back()->with('error', "Produk dengan ID {$productId} tidak tersedia.");
+            }
+            if ($product->stock < $item['quantity']) {
+                return back()->with('error', "Stok {$product->name} tidak mencukupi (tersedia: {$product->stock}).");
+            }
+        }
+
+        $order = DB::transaction(function () use ($request, $cart, $products) {
+            $order = Order::create([
+                'order_number' => Order::generateOrderNumber(),
+                'customer_name' => $request->customer_name,
+                'customer_phone' => $request->customer_phone,
+                'customer_address' => $request->customer_address,
+                'customer_email' => $request->customer_email,
+                'notes' => $request->notes,
+                'total_amount' => 0,
+                'status' => 'menunggu_konfirmasi',
+            ]);
+
+            $total = 0;
+            $whatsappItems = [];
+
+            foreach ($cart as $productId => $item) {
+                $product = $products->get($productId);
+                if (!$product || !$product->is_active) {
+                    continue;
+                }
+
                 $subtotal = $product->price * $item['quantity'];
                 $total += $subtotal;
 
@@ -88,9 +121,16 @@ class CheckoutController extends Controller
 
                 $whatsappItems[] = "• {$product->name} (x{$item['quantity']}) - Rp " . number_format($subtotal, 0, ',', '.');
             }
-        }
 
-        $order->update(['total_amount' => $total]);
+            $order->update([
+                'total_amount' => $total,
+            ]);
+
+            // Attach WhatsApp items to order for use outside transaction
+            $order->whatsappItems = $whatsappItems;
+
+            return $order;
+        });
 
         // Clear cart
         session()->forget('cart');
@@ -107,20 +147,19 @@ class CheckoutController extends Controller
             $message .= "Email: {$request->customer_email}\n";
         }
         $message .= "\n📦 *Detail Pesanan:*\n";
-        $message .= implode("\n", $whatsappItems);
-        $message .= "\n\n💰 *Total: Rp " . number_format($total, 0, ',', '.') . "*\n";
+        $message .= implode("\n", $order->whatsappItems);
+        $message .= "\n\n💰 *Total: Rp " . number_format($order->total_amount, 0, ',', '.') . "*\n";
         if ($request->notes) {
             $message .= "\n📝 Catatan: {$request->notes}\n";
         }
         $message .= "\n━━━━━━━━━━━━━━━\n";
         $message .= "Terima kasih telah memesan di PT Mitra Sarana Technindo.";
 
-        $whatsappNumber = config('app.whatsapp_number', env('WHATSAPP_NUMBER',''));
-        $whatsappUrl = 'https://wa.me/' . $whatsappNumber . '?text=' . urlencode($message);
+        $whatsappUrl = 'https://wa.me/' . config('app.whatsapp_number') . '?text=' . urlencode($message);
 
         return redirect()->route('checkout.success', [
             'order' => $order->order_number,
-            'wa' => $whatsappUrl
+            'wa' => $whatsappUrl,
         ]);
     }
 

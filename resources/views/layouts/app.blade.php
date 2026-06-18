@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logoKapalJaki.png') }}">
 
     {{-- SEO Meta Tags --}}
     <title>@yield('meta_title', 'PT Mitra Sarana Technindo - Supplier Sparepart Pelayaran Terpercaya')</title>
@@ -25,7 +26,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    
+
 </head>
 
 <body class="text-gray-800 bg-gray-50">
@@ -40,7 +41,7 @@
                 </span>
             </div>
             <div class="flex items-center gap-4">
-                <a href="https://wa.me/{{ env('WHATSAPP_NUMBER', '6281234567890') }}"
+                <a href="https://wa.me/{{ config('app.whatsapp_number') }}"
                     class="flex items-center gap-1 transition hover:text-white">
                     <i data-lucide="phone" class="w-3.5 h-3.5"></i>
                     Hubungi Kami
@@ -57,7 +58,7 @@
                 <a href="{{ route('home') }}" class="flex items-center gap-3">
 
                     <div class="hidden sm:block">
-                        <h1 class="text-lg font-semibold tracking-tight text-navy-900">
+                        <h1 class="text-lg font-semibold tracking-tight text-navy-900 font-heading">
                             Mitra Sarana
                         </h1>
 
@@ -70,12 +71,12 @@
                 {{-- Desktop Menu --}}
                 <div class="items-center hidden gap-8 lg:flex">
                     <a href="{{ route('home') }}"
-                        class="text-gray-700 hover:text-navy-800 font-medium transition {{ request()->routeIs('home') ? 'text-navy-800 border-b-2 border-navy-800 pb-1' : '' }}">Beranda</a>
+                        class="text-gray-700 hover:text-navy-800 font-medium transition {{ request()->routeIs('home') ? 'text-navy-800 border-b-2 border-navy-800 pb-1' : '' }} font-heading">Beranda</a>
                     <a href="{{ route('products.index') }}"
-                        class="text-gray-700 hover:text-navy-800 font-medium transition {{ request()->routeIs('products.*') ? 'text-navy-800 border-b-2 border-navy-800 pb-1' : '' }}">Katalog
+                        class="text-gray-700 hover:text-navy-800 font-medium transition {{ request()->routeIs('products.*') ? 'text-navy-800 border-b-2 border-navy-800 pb-1' : '' }} font-heading">Katalog
                         Produk</a>
-                    <a href="{{ route('aboutus') }}" class="font-medium text-gray-700 transition hover:text-navy-800">Tentang Kami</a>
-                    <a href="#kontak" class="font-medium text-gray-700 transition hover:text-navy-800">Kontak</a>
+                    <a href="{{ route('aboutus') }}" class="font-medium text-gray-700 transition hover:text-navy-800 font-heading">Tentang Kami</a>
+                    <a href="{{ route('contact') }}" class="font-medium text-gray-700 transition hover:text-navy-800 font-heading">Kontak</a>
                 </div>
 
                 {{-- Cart & Mobile Menu --}}
@@ -98,11 +99,11 @@
 
             {{-- Mobile Menu --}}
             <div x-show="mobileOpen" x-cloak x-transition class="pb-4 border-t lg:hidden">
-                <a href="{{ route('home') }}" class="block px-2 py-3 text-gray-700 rounded hover:bg-navy-50">Beranda</a>
+                <a href="{{ route('home') }}" class="block px-2 py-3 text-gray-700 rounded hover:bg-navy-50 font-heading">Beranda</a>
                 <a href="{{ route('products.index') }}"
-                    class="block px-2 py-3 text-gray-700 rounded hover:bg-navy-50">Katalog Produk</a>
-                <a href="{{ route('aboutus') }}" class="block px-2 py-3 text-gray-700 rounded hover:bg-navy-50">Tentang Kami</a>
-                <a href="#kontak" class="block px-2 py-3 text-gray-700 rounded hover:bg-navy-50">Kontak</a>
+                    class="block px-2 py-3 text-gray-700 rounded hover:bg-navy-50 font-heading">Katalog Produk</a>
+                <a href="{{ route('aboutus') }}" class="block px-2 py-3 text-gray-700 rounded hover:bg-navy-50 font-heading">Tentang Kami</a>
+                <a href="{{ route('contact') }}" class="block px-2 py-3 text-gray-700 rounded hover:bg-navy-50 font-heading">Kontak</a>
             </div>
         </div>
     </nav>
@@ -139,7 +140,7 @@
                             <i data-lucide="anchor" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold text-white">PT Mitra Sarana Technindo</h3>
+                            <h3 class="text-lg font-bold text-white font-heading">PT Mitra Sarana Technindo</h3>
                             <p class="text-xs text-navy-400">Supplier Sparepart Pelayaran Sejak 2008</p>
                         </div>
                     </div>
@@ -155,7 +156,7 @@
 
                 {{-- Quick Links --}}
                 <div>
-                    <h4 class="mb-4 font-semibold text-white">Menu</h4>
+                    <h4 class="mb-4 font-semibold text-white font-heading">Menu</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('home') }}" class="transition hover:text-white">Beranda</a></li>
                         <li><a href="{{ route('products.index') }}" class="transition hover:text-white">Katalog
@@ -167,9 +168,9 @@
 
                 {{-- Contact --}}
                 <div>
-                    <h4 class="mb-4 font-semibold text-white">Hubungi Kami</h4>
+                    <h4 class="mb-4 font-semibold text-white font-heading">Hubungi Kami</h4>
                     <div class="space-y-3 text-sm">
-                        <a href="https://wa.me/{{ env('WHATSAPP_NUMBER', '6281234567890') }}"
+                        <a href="https://wa.me/{{ config('app.whatsapp_number') }}"
                             class="flex items-center gap-2 transition hover:text-white">
                             <i data-lucide="message-circle" class="w-4 h-4 text-green-400"></i>
                             WhatsApp
@@ -182,13 +183,13 @@
                 </div>
             </div>
             <div class="pt-6 mt-10 text-sm text-center border-t border-navy-800 text-navy-500">
-                &copy; {{ date('Y') }} PT Mitra Sarana Technindo. All Rights Reserved.
+                &copy; {{ date('Y') }} PT Mitra Sarana Technindo. Hak Cipta Dilindungi.
             </div>
         </div>
     </footer>
 
     {{-- WhatsApp Float Button --}}
-    <a href="https://wa.me/{{ env('WHATSAPP_NUMBER', '6281234567890') }}" target="_blank"
+    <a href="https://wa.me/{{ config('app.whatsapp_number') }}" target="_blank"
         class="fixed z-40 flex items-center justify-center w-12 h-12 text-white transition-transform bg-green-500 rounded-full shadow-lg bottom-6 right-6 hover:bg-green-600 hover:scale-110">
         <i data-lucide="message-circle" class="w-7 h-7"></i>
     </a>

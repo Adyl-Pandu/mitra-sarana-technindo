@@ -14,7 +14,7 @@
 </div>
 
 <div class="max-w-5xl mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold text-navy-900 mb-6 flex items-center gap-2">
+    <h1 class="text-2xl font-bold text-navy-900 mb-6 flex items-center gap-2 font-heading">
         <i data-lucide="shopping-cart" class="w-7 h-7"></i>
         Keranjang Belanja
     </h1>
@@ -93,7 +93,7 @@
     @else
         <div class="text-center py-20 bg-white rounded-xl border border-gray-100">
             <i data-lucide="shopping-cart" class="w-20 h-20 text-gray-200 mx-auto mb-4"></i>
-            <h2 class="text-lg font-semibold text-gray-700 mb-2">Keranjang Belanja Kosong</h2>
+            <h2 class="text-lg font-semibold text-gray-700 mb-2 font-heading">Keranjang Belanja Kosong</h2>
             <p class="text-gray-500 mb-6">Anda belum menambahkan produk ke keranjang.</p>
             <a href="{{ route('products.index') }}" class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white px-6 py-3 rounded-lg transition">
                 <i data-lucide="grid-3x3" class="w-4 h-4"></i>

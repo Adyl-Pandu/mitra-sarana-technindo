@@ -42,8 +42,21 @@ class CartController extends Controller
         $quantity = $request->input('quantity', 1);
         $cart = session()->get('cart', []);
 
+        $existingQty = $cart[$product->id]['quantity'] ?? 0;
+        $totalQty = $existingQty + ($existingQty > 0 ? $quantity : 0);
+
+        if ($existingQty > 0) {
+            $totalQty = $existingQty + $quantity;
+        } else {
+            $totalQty = $quantity;
+        }
+
+        if ($totalQty > $product->stock) {
+            return back()->with('error', "Stok {$product->name} tidak mencukupi. Tersedia: {$product->stock}.");
+        }
+
         if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity'] += $quantity;
+            $cart[$product->id]['quantity'] = $totalQty;
         } else {
             $cart[$product->id] = [
                 'quantity' => $quantity,
@@ -64,6 +77,10 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         if (isset($cart[$productId])) {
+            $product = Product::find($productId);
+            if ($product && $request->quantity > $product->stock) {
+                return back()->with('error', "Stok {$product->name} tidak mencukupi. Tersedia: {$product->stock}.");
+            }
             $cart[$productId]['quantity'] = $request->quantity;
             session()->put('cart', $cart);
         }

@@ -44,7 +44,7 @@
                 {{ $product->category->name }}
             </a>
 
-            <h1 class="text-2xl lg:text-3xl font-bold text-navy-900 mb-2">{{ $product->name }}</h1>
+            <h1 class="text-2xl lg:text-3xl font-bold text-navy-900 mb-2 font-heading">{{ $product->name }}</h1>
 
             @if($product->sku)
                 <p class="text-sm text-gray-400 mb-4">SKU: {{ $product->sku }}</p>
@@ -66,7 +66,7 @@
             {{-- Description --}}
             @if($product->description)
             <div class="mb-6">
-                <h2 class="text-sm font-semibold text-navy-800 mb-2 uppercase tracking-wider">Deskripsi Produk</h2>
+                <h2 class="text-sm font-semibold text-navy-800 mb-2 uppercase tracking-wider font-heading">Deskripsi Produk</h2>
                 <p class="text-gray-600 leading-relaxed">{{ $product->description }}</p>
             </div>
             @endif
@@ -74,7 +74,7 @@
             {{-- Specifications --}}
             @if($product->specifications)
             <div class="mb-6 bg-navy-50 rounded-xl p-5">
-                <h2 class="text-sm font-semibold text-navy-800 mb-3 uppercase tracking-wider">Spesifikasi</h2>
+                <h2 class="text-sm font-semibold text-navy-800 mb-3 uppercase tracking-wider font-heading">Spesifikasi</h2>
                 <div class="space-y-2">
                     @foreach(explode("\n", $product->specifications) as $spec)
                         @if(trim($spec))
@@ -110,7 +110,7 @@
             @endif
 
             {{-- WhatsApp Direct --}}
-            <a href="https://wa.me/{{ env('WHATSAPP_NUMBER', '6281234567890') }}?text={{ urlencode('Halo, saya tertarik dengan produk: ' . $product->name . ' (SKU: ' . $product->sku . '). Apakah masih tersedia?') }}"
+            <a href="https://wa.me/{{ config('app.whatsapp_number') }}?text={{ urlencode('Halo, saya tertarik dengan produk: ' . $product->name . ' (SKU: ' . ($product->sku ?? '-') . '). Apakah masih tersedia?') }}"
                target="_blank"
                class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium px-6 py-3 rounded-lg transition w-full lg:w-auto justify-center">
                 <i data-lucide="message-circle" class="w-5 h-5"></i>
@@ -122,7 +122,7 @@
     {{-- Related Products --}}
     @if($relatedProducts->count())
     <div class="mt-16">
-        <h2 class="text-xl font-bold text-navy-900 mb-6">Produk Terkait</h2>
+        <h2 class="text-xl font-bold text-navy-900 mb-6 font-heading">Produk Terkait</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
             @foreach($relatedProducts as $related)
                 @include('components.product-card', ['product' => $related])

@@ -16,15 +16,16 @@
 </div>
 
 <div class="max-w-5xl mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold text-navy-900 mb-6">Checkout</h1>
+    <h1 class="text-2xl font-bold text-navy-900 mb-6 font-heading">Checkout</h1>
 
-    <form action="{{ route('checkout.process') }}" method="POST">
+    <form action="{{ route('checkout.process') }}" method="POST" id="checkout-form">
         @csrf
+        <input type="hidden" name="checkout_token" value="{{ session('checkout_token') }}">
         <div class="grid lg:grid-cols-5 gap-8">
             {{-- Form --}}
             <div class="lg:col-span-3">
                 <div class="bg-white rounded-xl border border-gray-100 p-6">
-                    <h2 class="text-lg font-semibold text-navy-900 mb-5 flex items-center gap-2">
+                    <h2 class="text-lg font-semibold text-navy-900 mb-5 flex items-center gap-2 font-heading">
                         <i data-lucide="user" class="w-5 h-5 text-navy-500"></i>
                         Data Pemesan
                     </h2>
@@ -47,10 +48,11 @@
                         </div>
 
                         <div>
-                            <label for="customer_email" class="block text-sm font-medium text-gray-700 mb-1">Email (Opsional)</label>
+                            <label for="customer_email" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
                             <input type="email" name="customer_email" id="customer_email" value="{{ old('customer_email') }}"
                                    class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-navy-300 focus:border-navy-400 outline-none"
                                    placeholder="email@contoh.com">
+                            @error('customer_email') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
@@ -74,7 +76,7 @@
             {{-- Order Summary --}}
             <div class="lg:col-span-2">
                 <div class="bg-white rounded-xl border border-gray-100 p-6 sticky top-24">
-                    <h2 class="text-lg font-semibold text-navy-900 mb-5 flex items-center gap-2">
+                    <h2 class="text-lg font-semibold text-navy-900 mb-5 flex items-center gap-2 font-heading">
                         <i data-lucide="clipboard-list" class="w-5 h-5 text-navy-500"></i>
                         Ringkasan Pesanan
                     </h2>
@@ -98,7 +100,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3.5 rounded-lg transition flex items-center justify-center gap-2">
+                    <button type="submit" id="submit-btn" onclick="this.disabled=true;this.form.submit();" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3.5 rounded-lg transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
                         <i data-lucide="message-circle" class="w-5 h-5"></i>
                         Pesan via WhatsApp
                     </button>

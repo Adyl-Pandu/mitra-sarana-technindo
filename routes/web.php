@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\StockMovementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,11 @@ Route::get('/produk/{product}', [ProductController::class, 'show'])->name('produ
 Route::get('/tentang-kami', function () {
     return view('public.aboutus');
 })->name('aboutus');
+
+// Contact
+Route::get('/kontak', function () {
+    return view('public.contact');
+})->name('contact');
 
 // Cart
 Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
@@ -68,5 +74,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Reports
         Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+
+        // Stock Movements
+        Route::get('/stock-movements', [StockMovementController::class, 'index'])->name('stock-movements.index');
     });
 });

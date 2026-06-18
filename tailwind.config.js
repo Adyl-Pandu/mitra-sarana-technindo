@@ -21,7 +21,11 @@ export default {
                     900: '#102a43',
                     950: '#0a1929',
                 }
-            }
+            },
+            fontFamily: {
+                sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                heading: ['Montserrat', 'system-ui', '-apple-system', 'sans-serif'],
+            },
         },
     },
 

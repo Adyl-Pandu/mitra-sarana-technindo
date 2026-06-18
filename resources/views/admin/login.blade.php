@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin - PT Mitra Sarana Technindo</title>
     <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config={theme:{extend:{colors:{navy:{900:'#102a43',950:'#0a1929'}}}}}</script>
+    <link rel="icon" type="image/png" href="{{ asset('images/logoKapalJaki.png') }}">
+    <script>tailwind.config={theme:{extend:{colors:{navy:{900:'#102a43',950:'#0a1929'}},fontFamily:{sans:['Inter','system-ui','-apple-system','sans-serif'],heading:['Montserrat','system-ui','-apple-system','sans-serif']}}}}</script>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4 bg-navy-950">
+<body class="flex items-center justify-center min-h-screen p-4 bg-navy-950 font-sans">
     <div class="w-full max-w-md mx-auto">
         <!-- Header Section (Brand & Identity) -->
         <div class="flex flex-col items-center mb-8 text-center">
@@ -17,13 +21,13 @@
                 class="flex items-center justify-center w-16 h-16 mb-4 transition-transform rounded-2xl bg-white/10 backdrop-blur-sm hover:scale-105">
                 <i data-lucide="anchor" class="w-8 h-8 text-white"></i>
             </div>
-            <h1 class="text-2xl font-bold tracking-tight text-white">Admin Panel</h1>
+            <h1 class="text-2xl font-bold tracking-tight text-white font-heading">Admin Panel</h1>
             <p class="mt-1.5 text-sm tracking-wide text-slate-400">PT Mitra Sarana Technindo</p>
         </div>
 
         <!-- Card Form Section -->
         <div class="p-8 bg-white border shadow-2xl border-slate-100 rounded-2xl">
-            <h2 class="mb-6 text-xl font-bold tracking-tight text-slate-900">Masuk ke Dashboard</h2>
+            <h2 class="mb-6 text-xl font-bold tracking-tight text-slate-900 font-heading">Masuk ke Dashboard</h2>
 
             <!-- Laravel Error Alert -->
             @if($errors->any())

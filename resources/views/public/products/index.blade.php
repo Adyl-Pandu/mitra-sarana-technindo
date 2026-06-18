@@ -37,7 +37,7 @@
 
             {{-- Categories --}}
             <div class="bg-white rounded-xl border border-gray-100 p-5">
-                <h3 class="font-semibold text-navy-900 mb-4">Kategori</h3>
+                <h3 class="font-semibold text-navy-900 mb-4 font-heading">Kategori</h3>
                 <ul class="space-y-1">
                     <li>
                         <a href="{{ route('products.index') }}"
@@ -89,7 +89,7 @@
             @else
                 <div class="text-center py-20">
                     <i data-lucide="search-x" class="w-16 h-16 text-gray-300 mx-auto mb-4"></i>
-                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Produk Tidak Ditemukan</h3>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2 font-heading">Produk Tidak Ditemukan</h3>
                     <p class="text-gray-500 mb-6">Coba gunakan kata kunci lain atau lihat semua produk.</p>
                     <a href="{{ route('products.index') }}" class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white px-6 py-2.5 rounded-lg text-sm transition">
                         Lihat Semua Produk

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\StockMovement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -121,7 +122,25 @@ class ProductController extends Controller
 
         $validated['alt_text'] = $validated['name'] . ' - Sparepart Pelayaran';
 
+        $oldStock = $product->stock;
         $product->update($validated);
+
+        if ($oldStock != $product->stock) {
+            $diff = $product->stock - $oldStock;
+            $type = $diff > 0 ? 'masuk' : 'keluar';
+
+            StockMovement::create([
+                'product_id' => $product->id,
+                'type' => $type,
+                'quantity' => abs($diff),
+                'stock_before' => $oldStock,
+                'stock_after' => $product->stock,
+                'reference_type' => 'manual',
+                'reference_id' => null,
+                'description' => 'Penyesuaian stok manual',
+                'created_by' => auth()->id(),
+            ]);
+        }
 
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil diperbarui.');
     }

@@ -9,7 +9,7 @@
             <i data-lucide="check-circle" class="w-10 h-10 text-green-500"></i>
         </div>
 
-        <h1 class="text-2xl font-bold text-navy-900 mb-3">Pesanan Berhasil Dibuat!</h1>
+        <h1 class="text-2xl font-bold text-navy-900 mb-3 font-heading">Pesanan Berhasil Dibuat!</h1>
 
         @if($orderNumber)
             <p class="text-gray-500 mb-2">Nomor Pesanan Anda:</p>

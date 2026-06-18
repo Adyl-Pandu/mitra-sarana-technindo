@@ -25,13 +25,13 @@
 
                     <p
                         class="mb-4 text-[11px] sm:text-sm font-semibold tracking-[4px] sm:tracking-[6px] text-sky-400 uppercase">
-                        Marine & Industrial Supplier
+                        Supplier Maritim & Industri
                     </p>
 
-                    <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-7xl">
-                        Smart Industrial
+                    <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-7xl font-heading">
+                        Mitra Industrial
                         <span class="text-sky-400">
-                            Partner
+                            Terpercaya
                         </span>
                     </h1>
 
@@ -46,13 +46,13 @@
                         <a href="{{ route('products.index') }}"
                             class="w-full px-6 py-3 text-sm font-semibold text-center text-white transition-all duration-300 shadow-xl sm:w-auto bg-sky-400 rounded-xl hover:bg-sky-700">
 
-                            Explore Products
+                            Jelajahi Produk
                         </a>
 
                         <a href="#about"
                             class="w-full px-6 py-3 text-sm font-semibold text-center text-white transition-all duration-300 border border-white sm:w-auto rounded-xl hover:bg-white hover:text-black">
 
-                            Learn More
+                            Pelajari Lebih Lanjut
                         </a>
 
                     </div>
@@ -73,10 +73,10 @@
                 <div class="order-2 lg:order-1">
 
                     <span class="inline-block mb-3 text-xs font-bold tracking-[3px] uppercase text-sky-400">
-                        Get To Know
+                        Tentang Kami
                     </span>
 
-                    <h2 class="mb-5 text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">
+                    <h2 class="mb-5 text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl lg:text-5xl font-heading">
                         PT Mitra Sarana Technindo
                     </h2>
 
@@ -97,13 +97,13 @@
                         <a href="{{ route('products.index') }}"
                             class="px-6 py-3 text-sm font-semibold text-center text-white transition rounded-xl bg-sky-400 hover:bg-sky-700">
 
-                            Discover Our Products
+                            Jelajahi Produk
                         </a>
 
-                        <a href="#contact"
+                        <a href="{{ route('contact') }}"
                             class="px-6 py-3 text-sm font-semibold text-center text-gray-700 transition border border-gray-300 rounded-xl hover:bg-gray-100">
 
-                            Contact Us
+                            Hubungi Kami
                         </a>
 
                     </div>
@@ -130,7 +130,7 @@
                 {{-- IMAGE --}}
                 <div class="relative overflow-hidden shadow-2xl rounded-3xl">
 
-                    <img src="{{ asset('images/warehouse-2.jpg') }}" alt="Warehouse"
+                    <img src="{{ asset('images/warehouse-2.jpg') }}" alt="Gudang PT Mitra Sarana Technindo"
                         class="object-cover w-full h-[300px] sm:h-[400px] lg:h-[520px] transition duration-500 hover:scale-105">
 
                 </div>
@@ -139,10 +139,10 @@
                 <div>
 
                     <span class="inline-block mb-3 text-xs font-bold tracking-[3px] uppercase text-sky-400">
-                        What We Do
+                        Layanan Kami
                     </span>
 
-                    <h2 class="mb-6 text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">
+                    <h2 class="mb-6 text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl lg:text-5xl font-heading">
                         Solusi Sparepart &
                         <span class="text-sky-400">
                             Perlengkapan Kapal
@@ -177,8 +177,8 @@
                             </div>
 
                             <div>
-                                <h4 class="font-bold text-gray-900">
-                                    Original Product
+                                <h4 class="font-bold text-gray-900 font-heading">
+                                    Produk Original
                                 </h4>
 
                                 <p class="mt-1 text-sm text-gray-500">
@@ -196,8 +196,8 @@
                             </div>
 
                             <div>
-                                <h4 class="font-bold text-gray-900">
-                                    Marine Specialist
+                                <h4 class="font-bold text-gray-900 font-heading">
+                                    Spesialis Marine
                                 </h4>
 
                                 <p class="mt-1 text-sm text-gray-500">
@@ -215,8 +215,8 @@
                             </div>
 
                             <div>
-                                <h4 class="font-bold text-gray-900">
-                                    Fast Delivery
+                                <h4 class="font-bold text-gray-900 font-heading">
+                                    Pengiriman Cepat
                                 </h4>
 
                                 <p class="mt-1 text-sm text-gray-500">
@@ -234,8 +234,8 @@
                             </div>
 
                             <div>
-                                <h4 class="font-bold text-gray-900">
-                                    Professional Team
+                                <h4 class="font-bold text-gray-900 font-heading">
+                                    Tim Profesional
                                 </h4>
 
                                 <p class="mt-1 text-sm text-gray-500">

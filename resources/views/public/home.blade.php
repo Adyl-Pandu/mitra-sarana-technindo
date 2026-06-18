@@ -14,7 +14,7 @@
     <div class="absolute inset-0 z-0">
         <img
             src={{ asset('images/dominik-luckmann-SInhLTQouEk-unsplash.jpg') }}
-            alt="Marine Spareparts Background"
+            alt="Background Sparepart Kapal"
             class="object-cover w-full h-full"
         />
         <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent"></div>
@@ -27,10 +27,10 @@
                 <span class="font-medium">Terpercaya Sejak 2008</span>
             </div>
 
-            <h1 class="mb-6 text-4xl font-semibold leading-tight text-white md:text-5xl lg:text-6xl">
-                Marine Equipment
+            <h1 class="mb-6 text-4xl font-semibold leading-tight text-white md:text-5xl lg:text-6xl font-heading">
+                Supplier Sparepart
                 <span class="block text-sky-400">
-                    & Ship Spare Parts Supplier
+                    & Peralatan Kapal
                 </span>
             </h1>
 
@@ -46,7 +46,7 @@
                     Lihat Katalog Produk
                 </a>
 
-                <a href="https://wa.me/{{ env('WHATSAPP_NUMBER', '6281234567890') }}"
+                <a href="https://wa.me/{{ config('app.whatsapp_number') }}"
                    target="_blank"
                    class="inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-white transition-all duration-300 border bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-xl border-white/20">
                     <i data-lucide="message-circle" class="w-5 h-5 text-green-400"></i>
@@ -68,19 +68,19 @@
     <div class="px-4 py-6 mx-auto max-w-7xl">
         <div class="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
             <div>
-                <p class="text-2xl font-bold lg:text-3xl text-navy-900">17+</p>
+                <p class="text-2xl font-bold lg:text-3xl text-navy-900 font-heading">17+</p>
                 <p class="text-sm text-gray-500">Tahun Pengalaman</p>
             </div>
             <div>
-                <p class="text-2xl font-bold lg:text-3xl text-navy-900">500+</p>
+                <p class="text-2xl font-bold lg:text-3xl text-navy-900 font-heading">500+</p>
                 <p class="text-sm text-gray-500">Produk Tersedia</p>
             </div>
             <div>
-                <p class="text-2xl font-bold lg:text-3xl text-navy-900">200+</p>
+                <p class="text-2xl font-bold lg:text-3xl text-navy-900 font-heading">200+</p>
                 <p class="text-sm text-gray-500">Pelanggan Aktif</p>
             </div>
             <div>
-                <p class="text-2xl font-bold lg:text-3xl text-navy-900">100%</p>
+                <p class="text-2xl font-bold lg:text-3xl text-navy-900 font-heading">100%</p>
                 <p class="text-sm text-gray-500">Produk Original</p>
             </div>
         </div>
@@ -101,10 +101,10 @@
         {{-- Heading --}}
         <div class="max-w-2xl mx-auto text-center mb-14">
             <span class="inline-block px-4 py-1 mb-4 text-xs font-semibold tracking-wider uppercase rounded-full bg-navy-100 text-navy-700">
-                Product Categories
+                Kategori Produk
             </span>
 
-            <h2 class="mb-4 text-3xl font-extrabold leading-tight lg:text-5xl text-navy-900">
+            <h2 class="mb-4 text-3xl font-extrabold leading-tight lg:text-5xl text-navy-900 font-heading">
                 Kategori Produk
             </h2>
 
@@ -165,7 +165,7 @@
                     </div>
 
                     {{-- Content --}}
-                    <h3 class="mb-2 text-sm font-bold leading-snug transition-colors duration-300 lg:text-base text-navy-900 group-hover:text-navy-700">
+                    <h3 class="mb-2 text-sm font-bold leading-snug transition-colors duration-300 lg:text-base text-navy-900 group-hover:text-navy-700 font-heading">
                         {{ $category->name }}
                     </h3>
 
@@ -201,7 +201,7 @@
     <div class="px-4 mx-auto max-w-7xl">
         <div class="flex items-center justify-between mb-10">
             <div>
-                <h2 class="mb-2 text-2xl font-bold lg:text-3xl text-navy-900">Produk Unggulan</h2>
+                <h2 class="mb-2 text-2xl font-bold lg:text-3xl text-navy-900 font-heading">Produk Unggulan</h2>
                 <p class="text-gray-500">Produk sparepart pelayaran terlaris dan paling dicari.</p>
             </div>
             <a href="{{ route('products.index') }}" class="items-center hidden gap-1 font-medium transition md:inline-flex text-navy-700 hover:text-navy-900">
@@ -221,7 +221,7 @@
 <section class="px-4 py-16 mx-auto max-w-7xl">
     <div class="flex items-center justify-between mb-10">
         <div>
-            <h2 class="mb-2 text-2xl font-bold lg:text-3xl text-navy-900">Produk Terbaru</h2>
+            <h2 class="mb-2 text-2xl font-bold lg:text-3xl text-navy-900 font-heading">Produk Terbaru</h2>
             <p class="text-gray-500">Update terbaru produk sparepart pelayaran kami.</p>
         </div>
         <a href="{{ route('products.index') }}" class="items-center hidden gap-1 font-medium transition md:inline-flex text-navy-700 hover:text-navy-900">
@@ -295,7 +295,7 @@
                         </div>
                         <div>
                             <p class="text-sm font-medium text-white">WhatsApp</p>
-                            <a href="https://wa.me/{{ env('WHATSAPP_NUMBER', '6281234567890') }}" class="text-sm text-sky-400 hover:underline">Chat Langsung</a>
+                            <a href="https://wa.me/{{ config('app.whatsapp_number') }}" class="text-sm text-sky-400 hover:underline">Hubungi via WhatsApp</a>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">

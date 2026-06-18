@@ -25,7 +25,7 @@
             {{ $product->category->name }}
         </a>
         <a href="{{ route('products.show', $product) }}" class="block mb-2">
-            <h3 class="font-semibold text-navy-900 text-sm leading-snug line-clamp-2 group-hover:text-sky-700 transition">{{ $product->name }}</h3>
+            <h3 class="font-semibold text-navy-900 text-sm leading-snug line-clamp-2 group-hover:text-sky-700 transition font-heading">{{ $product->name }}</h3>
         </a>
         <div class="mt-auto pt-3 border-t border-gray-50 flex items-center justify-between">
             <p class="text-base lg:text-lg font-bold text-navy-900">{{ $product->formatted_price }}</p>
